@@ -5,6 +5,48 @@
     <title>Cylinder Calculations</title>	
 	<link rel="stylesheet" href="css/styles.css">
 	<script>
+        "use strict";
+        window.onload = init;
+
+        function init() {
+            document.getElementById
+                ("shapeForm").onsubmit = calculate;
+        }
+
+        //Calculates volume and area
+        function calculate() {
+            var volume;     //output
+            var area;       //output
+            //Inputs:
+            var radius = document.getElementById("radius");
+            var height = document.getElementById("height");
+
+            //Make sure that:
+            //1. The referenced item exists
+            //2. Each referenced object has a valid value
+            if(radius && (radius.value > 0) &&
+                height && (height.value > 0)) {
+
+                //Do the calculations:
+                volume =
+                        Math.PI *
+                        Math.pow(radius.value, 2) *
+                        height.value;
+
+
+
+            }
+
+
+        }
+
+        //Clears input and output from boxes
+        function formClear() {
+            document.getElementById("radius").value = "0";
+            document.getElementById("height").value = "0";
+            document.getElementById("volume").value = "";
+            document.getElementById("area").value = "";
+        } //end formClear
 	</script>
 </head>
 <body>
@@ -67,8 +109,8 @@
                     <td>
                         <input  type="submit"
                                 class="sbmt"
-								id="cylSubmit"
-                                value="Calculate";
+								id="submit"
+                                value="Calculate"
 								>
                     </td>
                 </tr>
@@ -77,9 +119,9 @@
                     <td>
                         <input  type="submit"
                                 class="sbmt"
-                                id="sphereClear"
+                                id="clear"
                                 value="Clear"
-								onclick="formClear();";
+								onclick="formClear()"
 								>
                     </td>
                 </tr>
