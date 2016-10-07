@@ -24,8 +24,11 @@
             //Make sure that:
             //1. The referenced item exists
             //2. Each referenced object has a valid value
-            if(radius && (radius.value > 0) &&
-                height && (height.value > 0)) {
+            if(radius && (parseFloat(radius.value) > 0) &&
+                height && (parseFloat(height.value) > 0)) {
+
+                alert(parseFloat(radius.value));
+                //Set a variable for parseFloat!!!
 
                 //Do the calculations:
                 volume =
@@ -33,12 +36,47 @@
                         Math.pow(radius.value, 2) *
                         height.value;
 
+                area =
+                        (
+                            2 *
+                            Math.PI *
+                            Math.pow(radius.value, 2)
+                        ) +
+                        (
+                            2 *
+                            Math.PI *
+                            radius.value *
+                            height.value
+                        );
+                volume = volume.toFixed(4);
+                area = area.toFixed(4);
 
+                //Output results
+                document.getElementById("volume").value = volume;
+                document.getElementById("area").value = area;
+            } //end if radius/height > 0
+            else {
+                //radius/height not valid
+                if (parseFloat(radius.value) == 0
+                        ||
+                    isNaN(parseFloat(radius.value))) {
+                    radius.value = "Enter # > 0";
+                }//end if radius
 
-            }
+                if (parseFloat(height.value) == 0
+                        ||
+                    isNaN(parseFloat(height.value))) {
+                    height.value = "Enter # > 0";
+                }//end if height
+            }//end else radius/height
 
+            //Prevent form submission:
+            return false;
+            //All functionality is on
+            //client side only, no need
+            //to submit data to server
 
-        }
+        }//end calculate function
 
         //Clears input and output from boxes
         function formClear() {
@@ -117,7 +155,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <input  type="submit"
+                        <input  type="button"
                                 class="sbmt"
                                 id="clear"
                                 value="Clear"
